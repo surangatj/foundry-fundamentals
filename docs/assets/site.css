@@ -89,3 +89,49 @@ footer{border-top:1px solid var(--border);padding:18px 16px;font-size:12px;color
 .hero p.sub{color:#C9C3E6;max-width:560px;margin:0 auto 28px}
 .hero .meta{margin-top:26px;font-size:13px;color:#A9A3C0}
 .agenda td:first-child{white-space:nowrap;font-weight:600}
+
+/* ---------- Microsoft Learn / Fluent styling (overrides) ---------- */
+:root{--ink:#161616;--muted:#505050;--bg:#FFFFFF;--card:#FFFFFF;--panel:#F5F5F5;--border:#E1E1E1;
+  --dialog:#0078D4;--dialog-soft:#EFF6FC;--foundry:#0F6CBD;--foundry-soft:#EFF6FC;--code-bg:#1E1E1E;--code-ink:#D4D4D4;--hero:#0B2A4A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#F2F2F2;--muted:#BDBDBD;--bg:#1B1B1B;--card:#242424;--panel:#2B2B2B;--border:#3B3B3B;
+  --dialog:#4FA8FF;--dialog-soft:#0F2A44;--foundry:#7FB8F0;--foundry-soft:#13283D;--code-bg:#0D0D0D}}
+:root[data-theme="dark"]{--ink:#F2F2F2;--muted:#BDBDBD;--bg:#1B1B1B;--card:#242424;--panel:#2B2B2B;--border:#3B3B3B;
+  --dialog:#4FA8FF;--dialog-soft:#0F2A44;--foundry:#7FB8F0;--foundry-soft:#13283D;--code-bg:#0D0D0D}
+body{font-family:'Segoe UI','Segoe UI Web (West European)',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',sans-serif;font-size:16px}
+a{color:var(--dialog);text-decoration:none}a:hover{text-decoration:underline}
+/* header: white bar like Microsoft Learn, with a blue top rule */
+header.top{background:var(--card);color:var(--ink);border-top:4px solid #0078D4;border-bottom:1px solid var(--border);padding:22px 16px 26px}
+header.top a.back{color:var(--dialog)}
+header.top h1{color:var(--ink);font-weight:600;font-size:clamp(26px,4.4vw,40px);letter-spacing:-.01em}
+header.top p{color:var(--muted)}
+.chip{background:var(--panel);color:var(--ink);border:1px solid var(--border);border-radius:4px;font-weight:600}
+.brand .f{background:#0078D4;border-radius:2px;padding:3px 10px}
+.brand .by{color:var(--muted);opacity:1}
+/* Fluent buttons: 4px radius, no pills */
+.cta{background:#0078D4;border-radius:4px;padding:10px 20px;font-weight:600;box-shadow:none}
+.cta:hover{background:#106EBE;text-decoration:none}
+.cta.alt{background:var(--card);color:var(--dialog);border:1px solid var(--dialog)}
+.cta.alt:hover{background:var(--dialog-soft)}
+/* cards: flat, subtle elevation, no coloured edges */
+.card,ol.steps>li,.goal,details.trouble,.stepnav a{border-radius:6px;border:1px solid var(--border);box-shadow:0 1.6px 3.6px rgba(0,0,0,.08),0 .3px .9px rgba(0,0,0,.06)}
+.card.core,.card.stretch{border-left:1px solid var(--border)}
+a.card:hover{transform:none;border-color:var(--dialog);box-shadow:0 6.4px 14.4px rgba(0,0,0,.12)}
+.card .k{color:var(--dialog);letter-spacing:.04em}
+ol.steps>li::before{background:#0078D4;border-radius:50%}
+.recap{background:var(--dialog-soft);border:1px solid #C7E0F4;border-radius:6px}
+.recap b{color:var(--foundry)}
+.note{border-radius:6px;background:var(--card);border:1px solid var(--border)}
+.note.tip{border-left:4px solid #107C10}.note.warn{border-left:4px solid #FFB900}.note.try{border-left:4px solid #0078D4}
+.stepnav a.next{border-right:1px solid var(--border);border-color:var(--dialog)}
+h2.sec{color:var(--ink);font-size:20px;text-transform:none;letter-spacing:0;font-weight:600;margin:36px 0 14px}
+table{border-radius:0}th{background:var(--panel);color:var(--ink);text-transform:none;font-size:14px;letter-spacing:0}
+.tablewrap{border-radius:6px}
+.code pre{border-radius:6px}
+footer{background:var(--panel)}
+.theme{border-radius:4px}
+/* landing hero: deep Microsoft blue gradient */
+.hero{background:linear-gradient(135deg,#0B2A4A 0%,#0F4C81 55%,#0078D4 100%)}
+.hero h1{font-weight:600}.hero h1 .accent{color:#50E6FF}
+.hero .brand .f{background:rgba(255,255,255,.14)}
+.hero .brand .by{color:#DCEBFA}
+.hero .cta{background:#FFFFFF;color:#0B2A4A}.hero .cta:hover{background:#EFF6FC}
