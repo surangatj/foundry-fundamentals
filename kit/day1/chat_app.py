@@ -17,6 +17,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 logging.getLogger("azure").setLevel(logging.CRITICAL)  # hide SDK log noise; we print friendly errors instead
+for stream in (sys.stdout, sys.stdin):  # Windows consoles default to a code page that can't show Sinhala or Tamil
+    if hasattr(stream, "reconfigure"):
+        stream.reconfigure(encoding="utf-8")
 
 MODEL = os.getenv("FOUNDRY_MODEL", "gpt-5.4-mini")  # your deployment name
 
