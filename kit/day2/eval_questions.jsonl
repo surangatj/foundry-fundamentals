@@ -1,0 +1,10 @@
+{"query": "What is the home loan interest rate for a salaried customer whose salary is credited to Serendib Bank?", "ground_truth": "11.5% fixed for the first 3 years, then AWPLR + 2.5%."}
+{"query": "What is the maximum tenure for a Serendib home loan?", "ground_truth": "25 years, and the loan must be repaid before the borrower turns 65."}
+{"query": "How much of the property value can I borrow to buy a house?", "ground_truth": "Up to 80% of the property's valuation for a purchase (70% for construction)."}
+{"query": "How much does it cost to replace a lost debit card?", "ground_truth": "LKR 750."}
+{"query": "Is there a fee for withdrawing cash from another bank's ATM in Sri Lanka?", "ground_truth": "Yes, LKR 30 per withdrawal."}
+{"query": "How long does it take to get a replacement card delivered to Kandy?", "ground_truth": "By courier within 7 working days outside Colombo, or collect from the registered branch within 3 working days."}
+{"query": "How long is an OTP valid?", "ground_truth": "3 minutes."}
+{"query": "ගෙදර ණය සඳහා සැකසුම් ගාස්තුව කීයද?", "ground_truth": "0.5% of the loan amount, minimum LKR 15,000 and maximum LKR 75,000."}
+{"query": "வங்கிக் கிளைகள் சனிக்கிழமை திறந்திருக்குமா?", "ground_truth": "Only selected Super Branches, Saturday 9:00 to 13:00; all branches are closed on Poya days and public holidays."}
+{"query": "What is the interest rate on a Serendib Bank personal loan?", "ground_truth": "Not in the documents: the assistant should say it doesn't know and refer the customer to the hotline 011 200 0000."}

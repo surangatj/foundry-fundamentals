@@ -1,0 +1,11 @@
+﻿query,ground_truth
+What is the home loan interest rate for a salaried customer whose salary is credited to Serendib Bank?,"11.5% fixed for the first 3 years, then AWPLR + 2.5%."
+What is the maximum tenure for a Serendib home loan?,"25 years, and the loan must be repaid before the borrower turns 65."
+How much of the property value can I borrow to buy a house?,Up to 80% of the property's valuation for a purchase (70% for construction).
+How much does it cost to replace a lost debit card?,LKR 750.
+Is there a fee for withdrawing cash from another bank's ATM in Sri Lanka?,"Yes, LKR 30 per withdrawal."
+How long does it take to get a replacement card delivered to Kandy?,"By courier within 7 working days outside Colombo, or collect from the registered branch within 3 working days."
+How long is an OTP valid?,3 minutes.
+ගෙදර ණය සඳහා සැකසුම් ගාස්තුව කීයද?,"0.5% of the loan amount, minimum LKR 15,000 and maximum LKR 75,000."
+வங்கிக் கிளைகள் சனிக்கிழமை திறந்திருக்குமா?,"Only selected Super Branches, Saturday 9:00 to 13:00; all branches are closed on Poya days and public holidays."
+What is the interest rate on a Serendib Bank personal loan?,Not in the documents: the assistant should say it doesn't know and refer the customer to the hotline 011 200 0000.
