@@ -147,9 +147,15 @@ def day1() -> str:
             ("Run it as a chat app (optional, for developers)",
              f'<p>Fastest: <a href="{CODESPACE}">open this repo in GitHub Codespaces</a> (Python and Azure CLI are '
              "pre-installed). Or clone it locally. Then:</p>"
-             + code("cd kit/day1\npip install -r requirements.txt\naz login --use-device-code\n"
-                    'export FOUNDRY_PROJECT_ENDPOINT="https://<resource>.services.ai.azure.com/api/projects/<project>"\n'
-                    'export FOUNDRY_MODEL="gpt-5.4-mini"\npython chat_app.py', "Terminal")
+             + code("cd kit/day1\npip install -r requirements.txt\naz login            # in Codespaces: az login --use-device-code", "Terminal")
+             + "<p>Copy <code>.env.example</code> to <code>.env</code> and fill in your project endpoint and model "
+               "deployment name (works the same on Windows, macOS and Linux):</p>"
+             + code("FOUNDRY_PROJECT_ENDPOINT=https://<resource>.services.ai.azure.com/api/projects/<project>\n"
+                    "FOUNDRY_MODEL=gpt-5.4-mini", ".env")
+             + code("python chat_app.py", "Run")
+             + note("tip", "Error?", "the app tells you what to fix: not signed in (<code>az login</code>), missing the "
+                    "<b>Azure AI User</b> role on the project, wrong deployment name, or wrong endpoint. Quick fallback for a "
+                    "demo: put the resource's endpoint and API key in <code>.env</code> (option B).")
              + "<p>The app signs in with your Azure identity (no API keys), uses the <b>Responses API</b>, keeps the "
                "conversation with <code>previous_response_id</code> and prints token usage — your cost meter. "
                f'Code: <a href="{REPO}/blob/main/kit/day1/chat_app.py"><code>kit/day1/chat_app.py</code></a>.</p>'),
