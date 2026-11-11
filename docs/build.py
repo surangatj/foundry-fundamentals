@@ -133,8 +133,9 @@ def day1() -> str:
              "Deployment type: <b>Global Standard</b> for experiments, or Data Zone / Standard if your organisation needs data "
              "processed in a specific geography. Keep the default deployment name.</p>"),
             ("Add the system message",
-             "<p>Open the deployment in the <b>playground</b>. Paste this into the instructions / system message box and set "
-             "temperature to about <b>0.3</b>:</p>" + code(SYSTEM_MESSAGE, "System message")),
+             "<p>Open the deployment in the <b>playground</b>. Paste this into the instructions / system message box. (GPT-5 models are "
+             "<i>reasoning</i> models, so there is no temperature slider — you can set <b>reasoning effort</b> instead; "
+             "classic models such as gpt-4.1-mini still show temperature.)</p>" + code(SYSTEM_MESSAGE, "System message")),
             ("Test it in three languages",
              "<p>Ask these one by one and check the behaviour:</p><div class='tablewrap'><table><tr><th>Prompt</th>"
              f"<th>What to look for</th></tr>{rows}</table></div>"),
