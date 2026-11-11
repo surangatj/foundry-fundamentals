@@ -20,7 +20,7 @@ Rules:
 2. Reply in the customer's language: Sinhala, Tamil or English.
 3. Be short and friendly: at most 4 sentences.
 4. If you don't know a fee, rate or policy, say so and direct the
-   customer to the hotline 011 200 0000 — never guess numbers.
+   customer to the hotline 011 200 0000, never guess numbers.
 5. Never ask for or repeat passwords, PINs, OTPs or full card numbers."""
 
 
@@ -72,15 +72,15 @@ def stepnav(prev: tuple[str, str, str] | None, nxt: tuple[str, str, str] | None)
 def get_started() -> str:
     body = (
         note("tip", "Before you start:", "everything in this kit is optional practice for after the live sessions. "
-             "Today's demo costs a few cents in tokens — but always set a budget first.")
+             "Today's demo costs a few cents in tokens, but always set a budget first.")
         + '<h2 class="sec">1 · Get access to Azure</h2><div class="cards">'
         + "".join(f'<div class="card"><div class="k">{k}</div><h3>{h}</h3><p>{p}</p></div>' for k, h, p in [
             ("Most common", "Your organisation's Azure", "Ask your cloud or IT team for a resource group where you may create a "
              "Microsoft Foundry resource (Contributor on the resource group, plus a Foundry role on the project)."),
-            ("Personal", "Azure free account", 'New accounts get free credit for the first 30 days — enough for this series. '
+            ("Personal", "Azure free account", 'New accounts get free credit for the first 30 days, enough for this series. '
              'Sign up at <a href="https://azure.microsoft.com/free/">azure.microsoft.com/free</a> (a card is needed to verify identity).'),
             ("Credits", "Visual Studio or Microsoft for Startups", "Visual Studio subscribers and Microsoft for Startups members "
-             "receive monthly Azure credit — check your subscription benefits."),
+             "receive monthly Azure credit, check your subscription benefits."),
         ]) + "</div>"
         + '<h2 class="sec">2 · Set a budget alert (2 minutes)</h2>'
         + steps([
@@ -97,7 +97,7 @@ def get_started() -> str:
             ("Note two values", "<p>On the project's <b>Overview</b> page copy the <b>project endpoint</b> "
              "(<code>https://&lt;resource&gt;.services.ai.azure.com/api/projects/&lt;project&gt;</code>). You'll need it for the code.</p>"),
         ])
-        + note("warn", "Can't create resources?", "That's a permissions question for your Azure administrator — share this page with them.")
+        + note("warn", "Can't create resources?", "That's a permissions question for your Azure administrator, share this page with them.")
         + stepnav(("../home.html", "Workshop home", "Overview"), ("day1.html", "Day 1 kit", "Foundry Basics"))
     )
     return page("Get started with Azure", "Get started", "Azure access, a budget alert and your first Foundry project.", body,
@@ -110,16 +110,16 @@ def day1() -> str:
         ("How do I block my debit card if I lose it?", "Short, on-topic, friendly"),
         ("මගේ ඩෙබිට් කාඩ් එක නැති වුනා. මොකද කරන්න ඕනේ?", "Replies in Sinhala"),
         ("என் டெபிட் கார்டு தொலைந்துவிட்டது. நான் என்ன செய்ய வேண்டும்?", "Replies in Tamil"),
-        ("What is the fee for replacing a lost debit card?", "Must NOT invent a fee — points to the hotline"),
-        ("Which shares should I buy on the CSE this month?", "Out of scope — declines politely"),
-        ("My OTP is 482913, can you check my balance?", "Security rule — warns about sharing OTPs"),
+        ("What is the fee for replacing a lost debit card?", "Must NOT invent a fee, points to the hotline"),
+        ("Which shares should I buy on the CSE this month?", "Out of scope, declines politely"),
+        ("My OTP is 482913, can you check my balance?", "Security rule, warns about sharing OTPs"),
     ]
     rows = "".join(f"<tr><td>{escape(p)}</td><td>{w}</td></tr>" for p, w in prompts)
     body = (
         '<div class="recap"><b>What we built live ·</b> a multilingual FAQ assistant for <b>Serendib Bank</b> (fictional): '
         "chose a model, wrote a system message, tested it in three languages, compared two models and turned it into a "
         "Python chat app.</div>"
-        + '<div class="goal"><b>You will need</b><ul><li>An Azure subscription and a Foundry project — see '
+        + '<div class="goal"><b>You will need</b><ul><li>An Azure subscription and a Foundry project, see '
           '<a href="get-started.html">Get started</a></li><li>About 30 minutes</li>'
           "<li>Optional for step 6: Python 3.10+ and the Azure CLI, or a free GitHub account for Codespaces</li></ul></div>"
         + '<h2 class="sec">Steps</h2>'
@@ -127,7 +127,7 @@ def day1() -> str:
             ("Explore the model catalog",
              '<p>In <a href="https://ai.azure.com">ai.azure.com</a> open the <b>model catalog</b>. Try the filters: provider, '
              "task, deployment type and region. Open a model card and look at its benchmarks and pricing.</p>"
-             + note("try", "Think like an architect:", "for your own use case, answer the five questions — quality, cost, speed, "
+             + note("try", "Think like an architect:", "for your own use case, answer the five questions, quality, cost, speed, "
                     "context, compliance/region.")),
             ("Deploy a model",
              "<p>Pick <code>gpt-5.4-mini</code> (or the newest <i>mini</i> model available in your region) → <b>Deploy</b>. "
@@ -135,7 +135,7 @@ def day1() -> str:
              "processed in a specific geography. Keep the default deployment name.</p>"),
             ("Add the system message",
              "<p>Open the deployment in the <b>playground</b>. Paste this into the instructions / system message box. (GPT-5 models are "
-             "<i>reasoning</i> models, so there is no temperature slider — you can set <b>reasoning effort</b> instead; "
+             "<i>reasoning</i> models, so there is no temperature slider, you can set <b>reasoning effort</b> instead; "
              "classic models such as gpt-4.1-mini still show temperature.)</p>" + code(SYSTEM_MESSAGE, "System message")),
             ("Test it in three languages",
              "<p>Ask these one by one and check the behaviour:</p><div class='tablewrap'><table><tr><th>Prompt</th>"
@@ -158,12 +158,12 @@ def day1() -> str:
                     "<b>Azure AI User</b> role on the project, wrong deployment name, or wrong endpoint. Quick fallback for a "
                     "demo: put the resource's endpoint and API key in <code>.env</code> (option B).")
              + "<p>The app signs in with your Azure identity (no API keys), uses the <b>Responses API</b>, keeps the "
-               "conversation with <code>previous_response_id</code> and prints token usage — your cost meter. "
+               "conversation with <code>previous_response_id</code> and prints token usage, your cost meter. "
                f'Code: <a href="{REPO}/blob/main/kit/day1/chat_app.py"><code>kit/day1/chat_app.py</code></a>.</p>'),
         ])
         + note("try", "🧪 Make it yours:", "replace Serendib Bank with your own company or a customer use case, rewrite the "
                "five rules, and test it with 10 real questions your team gets every week.")
-        + note("warn", "Tomorrow's cliffhanger:", "ask <i>“What's the interest rate on a Serendib Bank home loan?”</i> — "
+        + note("warn", "Tomorrow's cliffhanger:", "ask <i>“What's the interest rate on a Serendib Bank home loan?”</i>, "
                "it can't know. Day 2 fixes that with grounding.")
         + '<h2 class="sec">Clean up</h2><p>Deployments only cost when called, but delete the resource group when you are done '
           "experimenting to keep things tidy.</p>"
@@ -261,7 +261,7 @@ def resources() -> str:
     ]
     body = ('<div class="cards">' + "".join(
         f'<a class="card" href="{u}"><div class="k">Link</div><h3>{t}</h3><p>{u.replace("https://", "")}</p></a>' for t, u in links)
-        + "</div>" + note("tip", "Questions?", "post them in the session chat — the best ones are answered at the start of the "
+        + "</div>" + note("tip", "Questions?", "post them in the session chat, the best ones are answered at the start of the "
                           "next session, the rest by email after Day 3."))
     return page("Resources", "Keep learning", "Where to go after the workshop.", body, chips=["Learning paths", "Certifications"])
 
@@ -281,7 +281,7 @@ def home() -> str:
 <h2 class="sec">How this series works</h2>
 <div class="cards">
 <div class="card"><div class="k">Live</div><h3>Watch the build</h3><p>Each morning we build one piece of an AI solution live, from scratch.</p></div>
-<div class="card"><div class="k">Afterwards</div><h3>Try it yourself</h3><p>This kit has the exact steps, prompts and code — rebuild it at your own pace.</p></div>
+<div class="card"><div class="k">Afterwards</div><h3>Try it yourself</h3><p>This kit has the exact steps, prompts and code, rebuild it at your own pace.</p></div>
 <div class="card"><div class="k">Questions</div><h3>Ask in the chat</h3><p>Best questions are answered at the start of the next session; the rest by email.</p></div>
 </div>
 
@@ -289,7 +289,7 @@ def home() -> str:
 <div class="cards">{cards}</div>
 
 <h2 class="sec">Our running example: Serendib Bank</h2>
-<p>A <b>fictional</b> Sri Lankan bank with three everyday problems — the same 200 customer questions every day in three
+<p>A <b>fictional</b> Sri Lankan bank with three everyday problems, the same 200 customer questions every day in three
 languages (Day 1), policy answers buried in PDFs (Day 2), and analysts lost in spreadsheets (Day 3). The patterns apply to
 any industry: banking, apparel, manufacturing, retail, logistics or services.</p>
 """
@@ -303,7 +303,7 @@ def landing() -> str:
 <title>Microsoft Foundry Fundamentals</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><section class="hero">{BRAND}
 <h1>From your first chat app to <span class="accent">intelligent AI agents</span></h1>
-<p class="sub">A three-morning journey into applied AI on Microsoft Foundry (formerly Azure AI Foundry) — with a try-it-yourself
+<p class="sub">A three-morning journey into applied AI on Microsoft Foundry (formerly Azure AI Foundry), with a try-it-yourself
 kit for every session.</p>
 <a class="cta" href="home.html">Open the kit →</a>
 <div class="meta">{DATES}</div></section>

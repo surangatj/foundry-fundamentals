@@ -1,4 +1,4 @@
-"""Serendib Bank FAQ assistant — a minimal chat app on Microsoft Foundry.
+"""Serendib Bank FAQ assistant, a minimal chat app on Microsoft Foundry.
 
 Microsoft Foundry Fundamentals · Day 1 · Dialog Enterprise
 Serendib Bank is fictional.
@@ -28,7 +28,7 @@ Rules:
 2. Reply in the customer's language: Sinhala, Tamil or English.
 3. Be short and friendly: at most 4 sentences.
 4. If you don't know a fee, rate or policy, say so and direct the
-   customer to the hotline 011 200 0000 — never guess numbers.
+   customer to the hotline 011 200 0000, never guess numbers.
 5. Never ask for or repeat passwords, PINs, OTPs or full card numbers."""
 
 
@@ -50,7 +50,7 @@ def make_client():
         sys.exit("Set FOUNDRY_PROJECT_ENDPOINT in .env (copy it from your project's Overview page in ai.azure.com).")
     if "/api/projects/" not in endpoint:
         sys.exit("FOUNDRY_PROJECT_ENDPOINT should look like https://<resource>.services.ai.azure.com/api/projects/<project>"
-                 " — use the PROJECT endpoint from the project's Overview page.")
+                 ", use the PROJECT endpoint from the project's Overview page.")
     from azure.ai.projects import AIProjectClient
     from azure.identity import DefaultAzureCredential
 
@@ -76,13 +76,13 @@ def explain(error: Exception) -> str:
 
 def main() -> None:
     client = make_client()
-    print("Serendib Bank assistant — type your question (empty line to quit)\n")
+    print("Serendib Bank assistant, type your question (empty line to quit)\n")
     previous_id = None
     while question := input("You: ").strip():
         extra = {"previous_response_id": previous_id} if previous_id else {}  # keeps the conversation going
         try:
             response = client.responses.create(model=MODEL, instructions=SYSTEM_MESSAGE, input=question, **extra)
-        except Exception as error:  # noqa: BLE001 — show a friendly fix instead of a stack trace
+        except Exception as error:  # noqa: BLE001, show a friendly fix instead of a stack trace
             print(f"\n⚠️  {explain(error)}\n")
             continue
         previous_id = response.id
