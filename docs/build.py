@@ -241,6 +241,66 @@ def day2() -> str:
                 "Answer from your own documents, measure the quality, and protect it.", body,
                 chips=["Thu 12 Nov", "≈40 minutes", "Portal only"])
 
+
+# --------------------------------------------------------------------------- day 3
+def day3() -> str:
+    raw = f"{REPO}/raw/main/kit/day3"
+    tree = f"{REPO}/blob/main/kit/day3"
+    kit3 = pathlib.Path(__file__).parent.parent / "kit" / "day3"
+    files = [(f"{raw}/transactions_oct2026.csv", "CSV · fictional", "Card transactions, October", "5,000 rows with two hidden patterns to find"),
+             (f"{tree}/analyst_agent_instructions.txt", "Text", "Analyst agent instructions", "analyst_agent_instructions.txt"),
+             (f"{tree}/loan_advisor_instructions.txt", "Text", "Loan advisor instructions", "loan_advisor_instructions.txt"),
+             (f"{tree}/demo_prompts.md", "Prompts", "All demo prompts", "demo_prompts.md"),
+             (f"{tree}/agent_app.py", "Python", "Agent in code", "agent_app.py (Microsoft Agent Framework)")]
+    cards = "".join(f'<a class="card" href="{u}"><div class="k">{k}</div><h3>{t}</h3><p>{d}</p></a>' for u, k, t, d in files)
+    body = (
+        '<div class="recap"><b>What we built live ·</b> agents for Serendib Bank (fictional): an <b>analyst</b> that writes and '
+        "runs its own Python to find fraud patterns and draw charts, a <b>home-loan advisor</b> that combines documents, web search "
+        "and calculation, an <b>MCP</b> tool added by URL, the same agent <b>in code</b>, and a <b>workflow</b> of agents with "
+        "human approval.</div>"
+        + '<div class="goal"><b>You will need</b><ul><li>Your Foundry project (<a href="get-started.html">Get started</a>)</li>'
+          '<li>The Day 2 policy PDFs (<a href="day2.html">Day 2 kit</a>)</li><li>About 60 minutes for everything, or pick one demo</li></ul></div>'
+        + '<h2 class="sec">Download the files</h2><div class="cards">' + cards + "</div>"
+        + '<h2 class="sec">Steps</h2>'
+        + steps([
+            ("Transaction analyst (code interpreter)",
+             "<p>Create an agent, paste the analyst instructions, turn on <b>code interpreter</b> and attach "
+             "<code>transactions_oct2026.csv</code>. Then ask:</p>"
+             + code("Which branches had the most disputed card transactions in October? Show me a bar chart.")
+             + code("Look for anything unusual by time of day, country and merchant. What would a fraud analyst want to know?")
+             + "<p>Open the code the agent wrote. Can you find both hidden patterns?</p>"),
+            ("Home-loan advisor (three tools)",
+             "<p>Create an agent with the loan advisor instructions and three tools: <b>file search</b> (the Day 2 PDFs), "
+             "<b>web search</b> (or the rates bulletin <code>04-serendib-rates-bulletin.md</code> if web search isn't available) "
+             "and <b>code interpreter</b>. Ask:</p>"
+             + code("I earn LKR 450,000 a month after tax and my salary is credited to Serendib Bank. Can I afford a home loan of "
+                    "LKR 15 million over 20 years?")
+             + "<p>Expected: about <b>LKR 159,964</b> a month for the fixed period, under the LKR 180,000 limit (40% of income).</p>"),
+            ("Add a tool by URL (MCP)",
+             "<p>Add an <b>MCP</b> tool: label <code>microsoft_learn</code>, URL <code>https://learn.microsoft.com/api/mcp</code>. Ask:</p>"
+             + code("How do I add a custom blocklist to a guardrail in Microsoft Foundry?")),
+            ("The same agent in code (optional, for developers)",
+             f'<p>Open the repo in <a href="{CODESPACE}">GitHub Codespaces</a> or clone it, then:</p>'
+             + code("cd kit/day3\npip install -r requirements.txt\naz login", "Terminal")
+             + "<p>Copy <code>.env.example</code> to <code>.env</code>, add your project endpoint and model name, then run:</p>"
+             + code("python agent_app.py", "Run")
+             + "<p>Watch the <code>🔧 tool:</code> lines: the agent decides to call your Python functions. If something is wrong, "
+               "the app tells you what to fix.</p>"),
+            ("A workflow of agents",
+             "<p>In <b>Workflows</b>, create a triage agent that hands over to a <i>card agent</i> or a <i>loan agent</i>, and add a "
+             "<b>human approval</b> step before any refund. Try:</p>"
+             + code("I lost my card in Kandy yesterday and I see two withdrawals I didn't make.")),
+        ])
+        + note("try", "🧪 Make it yours:", "give the analyst agent a CSV export from your own business (sales, tickets, "
+               "orders, with no personal data) and ask it what a manager should worry about this month.")
+        + note("tip", "Next steps:", "Microsoft Learn courses AI-901 (fundamentals), AI-103 (developer) and AI-3026 (agents). "
+               "For an AI readiness session or a proof of concept on your use case, contact Dialog Enterprise.")
+        + stepnav(("day2.html", "Day 2 kit", "Grounded & Responsible AI"), ("resources.html", "Resources", "Keep learning"))
+    )
+    return page("Day 3 · Build AI Agents", "Day 3 · Build AI Agents",
+                "Agents that analyse data, combine tools, and work together.", body,
+                chips=["Fri 13 Nov", "≈60 minutes", "Portal + optional Python"])
+
 def coming(n: int, day: str, title: str, lead: str, items: list[str], prev, nxt) -> str:
     body = (note("tip", "Coming soon:", f"this page is published after the live session on {day}.")
             + '<div class="goal"><b>What we will cover</b><ul>' + "".join(f"<li>{i}</li>" for i in items) + "</ul></div>"
@@ -318,13 +378,7 @@ def main() -> None:
         "pages/get-started.html": get_started(),
         "pages/day1.html": day1(),
         "pages/day2.html": day2(),
-        "pages/day3.html": coming(3, "Fri 13 Nov", "Build AI Agents",
-                                  "Design and build agents equipped with tools and knowledge sources.",
-                                  ["From chatbot to agent: model + instructions + tools in a loop",
-                                   "Foundry Agent Service and built-in tools (code interpreter, file search, MCP)",
-                                   "A Serendib Bank analyst agent that turns a spreadsheet into insights and charts",
-                                   "The same agent in a few lines of Python"],
-                                  ("day2.html", "Day 2 kit", "Grounded & Responsible AI"), ("resources.html", "Resources", "Keep learning")),
+        "pages/day3.html": day3(),
         "pages/resources.html": resources(),
     }
     for path, html in pages.items():
