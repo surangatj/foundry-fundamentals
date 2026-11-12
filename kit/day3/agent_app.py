@@ -53,14 +53,24 @@ Check affordability against the 40% rule. Be brief, show the numbers, and end wi
 'This is an indicative estimate, not a loan offer.'"""
 
 
+def openai_v1_url(endpoint: str) -> str:
+    """Accept any Foundry/Azure OpenAI URL (resource, project or full) and keep only the host."""
+    from urllib.parse import urlparse
+
+    host = urlparse(endpoint.strip()).netloc
+    if not host:
+        sys.exit("Set AZURE_OPENAI_ENDPOINT in .env, e.g. https://<resource>.openai.azure.com")
+    return f"https://{host}/openai/v1/"
+
+
 def make_client():
     api_key = os.getenv("AZURE_OPENAI_API_KEY", "").strip()
     if api_key:  # Option B: quick demo fallback
         from agent_framework.openai import OpenAIChatClient
 
-        resource = os.getenv("AZURE_OPENAI_ENDPOINT", "").strip().rstrip("/")
-        print("Using API key (demo mode). For real apps use Entra ID.\n")
-        return OpenAIChatClient(model=MODEL, api_key=api_key, base_url=f"{resource}/openai/v1/")
+        base_url = openai_v1_url(os.getenv("AZURE_OPENAI_ENDPOINT", "") or os.getenv("FOUNDRY_PROJECT_ENDPOINT", ""))
+        print(f"Using API key (demo mode) → {base_url}  model: {MODEL}\n")
+        return OpenAIChatClient(model=MODEL, api_key=api_key, base_url=base_url)
     endpoint = os.getenv("FOUNDRY_PROJECT_ENDPOINT", "").strip()
     if "/api/projects/" not in endpoint:
         sys.exit("Set FOUNDRY_PROJECT_ENDPOINT in .env: https://<resource>.services.ai.azure.com/api/projects/<project>")
@@ -84,10 +94,11 @@ async def main() -> None:
         hint = ("Azure CLI not installed: install it, run `az login`, or use the API-key option in .env" if "Azure CLI not found" in text
                 else "Not signed in: run `az login`" if "az login" in text or "CredentialUnavailable" in text
                 else "Signed in but not allowed: add the 'Azure AI User' role on the project, or use the API-key option" if "401" in text or "403" in text
-                else f"Deployment not found: set FOUNDRY_MODEL to your deployment name (now '{MODEL}')" if "404" in text
+                else f"Not found (404): check FOUNDRY_MODEL is the exact deployment NAME (now '{MODEL}') and the endpoint host is your Foundry resource" if "404" in text
                 else "Can't reach the endpoint: check the URL in .env and your network/VPN" if "Connection error" in text
                 else text[:300])
-        sys.exit(f"\n⚠️  {hint}")
+        detail = str(error).split("\n")[0][:300]
+        sys.exit(f"\n⚠️  {hint}\n   details: {detail}")
     print(f"\n🤖 {result.text}")
 
 

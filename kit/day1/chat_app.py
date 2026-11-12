@@ -42,11 +42,13 @@ def make_client():
     if api_key:
         from openai import OpenAI
 
-        resource = os.getenv("AZURE_OPENAI_ENDPOINT", "").strip().rstrip("/")
-        if not resource:
+        from urllib.parse import urlparse
+
+        host = urlparse(os.getenv("AZURE_OPENAI_ENDPOINT", "") or os.getenv("FOUNDRY_PROJECT_ENDPOINT", "")).netloc
+        if not host:
             sys.exit("Set AZURE_OPENAI_ENDPOINT (e.g. https://<resource>.openai.azure.com) in .env")
-        print("Using API key (demo mode). For real apps use Entra ID.\n")
-        return OpenAI(base_url=f"{resource}/openai/v1/", api_key=api_key)
+        print(f"Using API key (demo mode) → https://{host}/openai/v1/  model: {MODEL}\n")
+        return OpenAI(base_url=f"https://{host}/openai/v1/", api_key=api_key)
 
     endpoint = os.getenv("FOUNDRY_PROJECT_ENDPOINT", "").strip()
     if not endpoint:
